@@ -1,0 +1,4 @@
+.bin/
+.obj/
+Povara.depend
+Povara.layout
