@@ -1,23 +1,39 @@
+#ifndef PovaraH
+#define PovaraH
+#include <string>
+
+using namespace std;
+
 class ActionOfCooker
 {
+protected:
+     int Skill;
      int Stazh;
      int Age;
      string Sex;
      string Post;
-     virtual void Cook const = 0;
-     virtual void Dismissal const = 0;
-     virtual void Vacation const = 0;
+public:
+     virtual void CookOff() const = 0; // не готовка
+     virtual void CookON() const = 0; // готовка
+     virtual void Dis() const = 0; // увольнение
+     virtual void Vac() const = 0; // отправка в отпуск
 };
 
 class Mouse: public ActionOfCooker
 {
 private:
-    Stazh = 28;
-    Age = 46;
-    Sex = "Man";
-    Post = L"Шеф-повар";
+    bool CookPasta;
+    int Skill = 100;
+    int Stazh = 28;
+    int Age = 46;
+    string Sex = "Man";
+    string Post = "Chef";
 public:
-
+    Mouse();
+    void CookON();
+    void CookOff(); // готовит пасту
+    void Dism(); // таракан
+    void Vac(); // отправка в отпуск на отсыпание
 
 
 };
@@ -25,30 +41,52 @@ public:
 class Cat: public ActionOfCooker
 {
 private:
-    Stazh = 20;
-    Age = 40;
-    Sex = "Man";
-    Post = L"Помощник шеф-повара";
+    bool CookSushi;
+    int Skill = 80;
+    int Stazh = 20;
+    int Age = 40;
+    string Sex = "Man";
+    string Post = "Assistant Chef";
 public:
-
+    Cat();
+    void CookON();
+    void CookOff(); // готовит соус
+    void Dism(); // курение
+    void Vac(); // отправка в отпуск на Канары
 };
 
 class Robot: public ActionOfCooker
 {
 private:
-    Stazh = 15;
-    Age = 38;
-    Sex = "Man";
-    Post = L"Кондитер";
+    bool CookDesert;
+    int Skill = 50;
+    int Stazh = 15;
+    int Age = 38;
+    string Sex = "Man";
+    string Post = "Confectioner";
 public:
+    Robot();
+    void CookON();
+    void CookOff(); // готовит карамель
+    void Dis(); // взломал базу Пентагона
+    void Vac(); // отправка на отпуск к семье
 };
 
 class WheelchairUser: public ActionOfCooker
 {
 private:
-    Stazh = 5;
-    Age = 30;
-    Sex = "Woman";
-    Post = L"Поварёнок";
+    bool CookCotlet;
+    int Skill = 30;
+    int Stazh = 5;
+    int Age = 30;
+    string Sex = "Woman";
+    string Post = "Kitchen boy";
 public:
+    WheelchairUser();
+    void CookON();
+    void CookOff(); // готовит котлету
+    void Dis(); // спалил кухню
+    void Vac(); // отправка на Кубу
 };
+
+#endif // PovaraH
