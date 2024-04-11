@@ -70,13 +70,52 @@ void Cat::Dism()
 
 void Cat::VacON()
 {
-    wcout << L"Ушел в отсып" << endl;
+    wcout << L"Улетел на Канары!" << endl;
     Skill -=20;
     VacKan = true;
 }
 
 void Cat::VacOff()
 {
-    wcout << L"Выспался и пришел на работу!" << endl;
+    wcout << L"Вернулся с Канар..." << endl;
     VacKan = false;
+}
+
+void Robot::CookON()
+{
+    wcout << L"Ушел готовить десерт" << endl;
+    CookDesert = true;
+}
+
+void Robot::CookOff()
+{
+    wcout << L"Приготовил десерт" << endl;
+    CookDesert = false;
+    if (Skill >= 100)
+    {
+        Skill = 100;
+    }
+    else
+    {
+        Skill +=10;
+    }
+}
+
+void Robot::Dism()
+{
+    wcout << L"Застали за взломом пентагона. Увольняют..." << endl;
+    Skill = 0;
+}
+
+void Robot::VacON()
+{
+    wcout << L"На отпуск к семье!" << endl;
+    Skill -=20;
+    VacFam = true;
+}
+
+void Robot::VacOff()
+{
+    wcout << L"Вернулся из отпуска!" << endl;
+    VacFam = false;
 }

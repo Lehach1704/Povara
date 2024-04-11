@@ -32,11 +32,11 @@ private:
     string Post = "Chef";
 public:
     Mouse();
-    void CookON();
-    void CookOff(); // готовит пасту
+    void CookON(); // готовит пасту
+    void CookOff(); // не готовит пасту
     void Dism(); // таракан
-    void VacON();
-    void VacOff(); // отправка в отпуск на отсыпание
+    void VacON(); // отправка в отпуск на отсыпание
+    void VacOff(); // возврат из отпуска
 
 
 };
@@ -53,11 +53,11 @@ private:
     string Post = "Assistant Chef";
 public:
     Cat();
-    void CookON();
-    void CookOff(); // готовит суши
+    void CookON(); // не готовит суши
+    void CookOff(); // не готовит суши
     void Dism(); // курение
-    void VacON();
-    void VacOff(); // отправка в отпуск на Канары
+    void VacON(); // отправка в отпуск на Канары
+    void VacOff(); // возврат из отпуска
 };
 
 class Robot: public ActionOfCooker
@@ -72,11 +72,11 @@ private:
     string Post = "Confectioner";
 public:
     Robot();
-    void CookON();
-    void CookOff(); // готовит карамель
+    void CookON(); // готовит карамель
+    void CookOff(); // не готовит карамель
     void Dis(); // взломал базу Пентагона
-    void VacON();
-    void VacOff(); // отправка на отпуск к семье
+    void VacON(); // отправка на отпуск к семье
+    void VacOff(); // возврат из отпуска
 };
 
 class WheelchairUser: public ActionOfCooker
@@ -91,11 +91,11 @@ private:
     string Post = "Kitchen boy";
 public:
     WheelchairUser();
-    void CookON();
-    void CookOff(); // готовит котлету
+    void CookON(); // готовит котлету
+    void CookOff(); // не готовит котлету
     void Dis(); // спалил кухню
-    void VacON();
-    void VacOff(); // отправка на Кубу
+    void VacON(); // отправка на Кубу
+    void VacOff(); // возврат из отпуска
 };
 
 #endif // PovaraH
