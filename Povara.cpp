@@ -29,22 +29,29 @@ void Mouse::Dism()
     Skill = 0;
 }
 
-void Mouse::Vac()
+void Mouse::VacON()
 {
     wcout << L"Ушел в отсып" << endl;
     Skill -=20;
+    VacSleep = true;
 }
 
-void Mouse::CookON()
+void Mouse::VacOff()
 {
-    wcout << L"Ушел готовить пасту" << endl;
-    CookPasta = true;
+    wcout << L"Выспался и пришел на работу!" << endl;
+    VacSleep = false;
 }
 
-void Mouse::CookOff()
+void Cat::CookON()
 {
-    wcout << L"Приготовил пасту" << endl;
-    CookPasta = false;
+    wcout << L"Ушел готовить суши" << endl;
+    CookSushi = true;
+}
+
+void Cat::CookOff()
+{
+    wcout << L"Приготовил суши" << endl;
+    CookSushi = false;
     if (Skill >= 100)
     {
         Skill = 100;
@@ -55,14 +62,21 @@ void Mouse::CookOff()
     }
 }
 
-void Mouse::Dism()
+void Cat::Dism()
 {
-    wcout << L"Нашли таракана. Увольняют..." << endl;
+    wcout << L"Застали за курением. Увольняют..." << endl;
     Skill = 0;
 }
 
-void Mouse::Vac()
+void Cat::VacON()
 {
     wcout << L"Ушел в отсып" << endl;
     Skill -=20;
+    VacKan = true;
+}
+
+void Cat::VacOff()
+{
+    wcout << L"Выспался и пришел на работу!" << endl;
+    VacKan = false;
 }
