@@ -119,3 +119,42 @@ void Robot::VacOff()
     wcout << L"Вернулся из отпуска!" << endl;
     VacFam = false;
 }
+
+void WheelchairUser::CookON()
+{
+    wcout << L"Ушла готовить котлету" << endl;
+    CookCotlet = true;
+}
+
+void WheelchairUser::CookOff()
+{
+    wcout << L"Приготовила котлету" << endl;
+    CookCotlet = false;
+    if (Skill >= 100)
+    {
+        Skill = 100;
+    }
+    else
+    {
+        Skill +=10;
+    }
+}
+
+void WheelchairUser::Dism()
+{
+    wcout << L"Спалила кухню. Увольняют..." << endl;
+    Skill = 0;
+}
+
+void WheelchairUser::VacON()
+{
+    wcout << L"На Кубу!" << endl;
+    Skill -=20;
+    VacKuba = true;
+}
+
+void WheelchairUser::VacOff()
+{
+    wcout << L"Вернулась из отпуска..." << endl;
+    VacKuba = false;
+}

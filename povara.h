@@ -74,7 +74,7 @@ public:
     Robot();
     void CookON(); // готовит карамель
     void CookOff(); // не готовит карамель
-    void Dis(); // взломал базу Пентагона
+    void Dism(); // взломал базу Пентагона
     void VacON(); // отправка на отпуск к семье
     void VacOff(); // возврат из отпуска
 };
@@ -93,7 +93,7 @@ public:
     WheelchairUser();
     void CookON(); // готовит котлету
     void CookOff(); // не готовит котлету
-    void Dis(); // спалил кухню
+    void Dism(); // спалил кухню
     void VacON(); // отправка на Кубу
     void VacOff(); // возврат из отпуска
 };
