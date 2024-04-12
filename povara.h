@@ -25,13 +25,14 @@ class Mouse: public ActionOfCooker
 private:
     bool VacSleep;
     bool CookPasta;
-    int Skill = 100;
-    int Stazh = 28;
-    int Age = 46;
-    string Sex = "Man";
-    string Post = "Chef";
+    int Skill;
+    int Stazh;
+    int Age;
+    string Sex;
+    string Post;
 public:
     Mouse();
+    virtual ~Mouse() {};
     void CookON(); // готовит пасту
     void CookOff(); // не готовит пасту
     void Dism(); // таракан
@@ -46,13 +47,14 @@ class Cat: public ActionOfCooker
 private:
     bool VacKan;
     bool CookSushi;
-    int Skill = 80;
-    int Stazh = 20;
-    int Age = 40;
-    string Sex = "Man";
-    string Post = "Assistant Chef";
+    int Skill;
+    int Stazh;
+    int Age;
+    string Sex;
+    string Post;
 public:
     Cat();
+    virtual ~Cat() {};
     void CookON(); // не готовит суши
     void CookOff(); // не готовит суши
     void Dism(); // курение
@@ -65,13 +67,14 @@ class Robot: public ActionOfCooker
 private:
     bool VacFam;
     bool CookDesert;
-    int Skill = 50;
-    int Stazh = 15;
-    int Age = 38;
-    string Sex = "Man";
-    string Post = "Confectioner";
+    int Skill;
+    int Stazh;
+    int Age;
+    string Sex;
+    string Post;
 public:
     Robot();
+    virtual ~Robot() {};
     void CookON(); // готовит карамель
     void CookOff(); // не готовит карамель
     void Dism(); // взломал базу Пентагона
@@ -84,13 +87,14 @@ class WheelchairUser: public ActionOfCooker
 private:
     bool VacKuba;
     bool CookCotlet;
-    int Skill = 30;
-    int Stazh = 5;
-    int Age = 30;
-    string Sex = "Woman";
-    string Post = "Kitchen boy";
+    int Skill;
+    int Stazh;
+    int Age;
+    string Sex;
+    string Post;
 public:
     WheelchairUser();
+    virtual ~WheelchairUser() {};
     void CookON(); // готовит котлету
     void CookOff(); // не готовит котлету
     void Dism(); // спалил кухню

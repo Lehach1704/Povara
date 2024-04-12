@@ -3,6 +3,50 @@
 
 using namespace std;
 
+Mouse::Mouse()
+{
+    bool VacSleep = false;
+    bool CookPasta = false;
+    int Skill = 100;
+    int Stazh = 28;
+    int Age = 46;
+    string Sex = "Man";
+    string Post = "Chef";
+}
+
+Cat::Cat()
+{
+    bool VacKan = false;
+    bool CookSushi = false;
+    int Skill = 80;
+    int Stazh = 20;
+    int Age = 40;
+    string Sex = "Man";
+    string Post = "Assistant Chef";
+}
+
+Robot::Robot()
+{
+    bool VacFam = false;
+    bool CookDesert = false;
+    int Skill = 50;
+    int Stazh = 15;
+    int Age = 38;
+    string Sex = "Man";
+    string Post = "Confectioner";
+}
+
+WheelchairUser::WheelchairUser()
+{
+    bool VacKuba = false;
+    bool CookCotlet = false;
+    int Skill = 30;
+    int Stazh = 5;
+    int Age = 30;
+    string Sex = "Woman";
+    string Post = "Kitchen boy";
+}
+
 void Mouse::CookON()
 {
     wcout << L"Ушел готовить пасту" << endl;
