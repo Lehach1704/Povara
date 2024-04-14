@@ -16,6 +16,20 @@ CookerContainer::CookerContainer(int maxSize)
     MaxSize = maxSize;
 }
 
+CookerContainer::~CookerContainer()
+{
+    for(int i=0; i<MaxSize; i++)
+    {
+        if(CookerBox[i] != NULL)
+        {
+            delete CookerBox[i];
+            CookerBox[i] = NULL;
+        }
+    }
+
+    delete[] CookerBox;
+}
+
 wstring PrintCookerType(const Cooker type)
 {
     switch(type)
@@ -33,15 +47,31 @@ void CookerContainer::AddCooker(CookerPtr newCooker)
     CookerBox[CookerCount++] = newCooker;
 }
 
-void Task1(CookerContainer *cookerBox)
+void OutPut(CookerContainer *cookerBox) //функция для вывода поваров
 {
     for(int i=0; i<cookerBox->GetCount(); i++)
     {
-        const CookerPtr outCook  = cookerBox->GetByIndex(i); // outCook = currentFruit
+        const CookerPtr outCook  = cookerBox->GetByIndex(i);
+        /*if(outCook->GetCooker() == Cooker::WheelchairUser)
+        {
+            wcout << i << L" (" << PrintCookerType(outCook->GetCooker()) << L")" << endl;
+        }*/
         wcout << i << L" (" << PrintCookerType(outCook->GetCooker()) << L")" << endl;
     }
+}
 
+void Vaccation (CookerContainer *cookerBox) // отправили всех поварят колясочников в отпуск
+{
+    for(int i=0; i<cookerBox->GetCount(); i++)
+    {
+        const CookerPtr outCook  = cookerBox->GetByIndex(i);
+        if(outCook->GetCooker() == Cooker::WheelchairUser)
+        {
+            outCook->VacON();
+        }
 
+    }
+    wcout << L"Все поварята отправлены в отпуск" << endl;
 }
 
 int main()
@@ -68,7 +98,9 @@ int main()
         cookerBox.AddCooker(new WheelchairUser());
     }
 
-    Task1(&cookerBox);
+    //OutPut(&cookerBox);
+    Vaccation(&cookerBox);
+
     /*for(int i=0; i<10; i++)
     {
         fruitBox.AddFruit(new Apple(ColorEnum::Red));

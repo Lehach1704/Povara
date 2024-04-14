@@ -47,7 +47,7 @@ WheelchairUser::WheelchairUser()
     string Post = "Kitchen boy";
 }
 
-void Mouse::CookON()
+/*void Mouse::CookON()
 {
     wcout << L"Ушел готовить пасту" << endl;
     CookPasta = true;
@@ -84,7 +84,7 @@ void Mouse::VacOff()
 {
     wcout << L"Выспался и пришел на работу!" << endl;
     VacSleep = false;
-}
+}*/
 
 void Cat::CookON()
 {
@@ -164,7 +164,7 @@ void Robot::VacOff()
     VacFam = false;
 }
 
-void WheelchairUser::CookON()
+/*void WheelchairUser::CookON()
 {
     wcout << L"Ушла готовить котлету" << endl;
     CookCotlet = true;
@@ -201,4 +201,4 @@ void WheelchairUser::VacOff()
 {
     wcout << L"Вернулась из отпуска..." << endl;
     VacKuba = false;
-}
+}*/

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-enum class Cooker: int
+enum class Cooker: int // перечисление поваров
 {
     Mouse,
     Cat,
@@ -41,7 +41,7 @@ public:
      void CookOff(); // не готовка
      void CookON(); // готовка
      void Dis(); // увольнение
-     void VacON(); // отправка в отпуск
+     virtual void VacON() = 0; // отправка в отпуск
      void VacOff(); // вернуть из отпуска
      virtual Cooker GetCooker() const = 0; // определение повара
 };
@@ -61,12 +61,12 @@ private:
 public:
     Mouse();
     virtual ~Mouse() {};
-    void CookON(); // готовит пасту
-    void CookOff(); // не готовит пасту
-    void Dism(); // таракан
-    void VacON(); // отправка в отпуск на отсыпание
-    void VacOff(); // возврат из отпуска
-    Cooker GetCooker() const {return Cooker::Mouse;}
+    void CookON() {}; // готовит пасту
+    void CookOff() {}; // не готовит пасту
+    void Dism() {}; // таракан
+    void VacON() {}; // отправка в отпуск на отсыпание
+    void VacOff() {wcout << L"Выспался и пришел на работу!" << endl; VacSleep = false;} // возврат из отпуска
+    Cooker GetCooker() const {return Cooker::Mouse;} // определение типа повара
 };
 
 class Cat: public ActionOfCooker
@@ -124,12 +124,12 @@ private:
 public:
     WheelchairUser();
     virtual ~WheelchairUser() {};
-    void CookON(); // готовит котлету
-    void CookOff(); // не готовит котлету
-    void Dism(); // спалил кухню
-    void VacON(); // отправка на Кубу
-    void VacOff(); // возврат из отпуска
-    Cooker GetCooker() const {return Cooker::WheelchairUser;}
+    void CookON() {}; // готовит котлету
+    void CookOff() {}; // не готовит котлету
+    void Dism() {}; // спалил кухню
+    void VacON() {wcout << L"На Кубу!" << endl; Skill -=20; VacKuba = true;}; // отправка на Кубу
+    void VacOff() {} // возврат из отпуска
+    Cooker GetCooker() const {return Cooker::WheelchairUser;} //тип повара: колясочник
 };
 
 /*class CookerContIterator1 : public Iterator<FruitPtr>
@@ -161,11 +161,39 @@ private:
     int MaxSize;
 public:
     CookerContainer(int maxSize);
-    /*virtual ~CookerContainer();*/
+    virtual ~CookerContainer();
     void AddCooker (CookerPtr newCooker);
     int GetCount() const { return CookerCount; }
     CookerPtr GetByIndex(int index) const { return CookerBox[index]; }
 
 };
+
+/*class CookerContainerV2 // альтернативный сбор поваров в контейнер
+{
+private:
+    vector<CookerBox>
+public:
+    CookerContainer(int maxSize);
+    virtual ~CookerContainer();
+    void AddCooker (CookerPtr newCooker);
+    int GetCount() const { return CookerCount; }
+    CookerPtr GetByIndex(int index) const { return CookerBox[index]; }
+
+};*/
+
+/*class CookerContainerSQLite //контейнер с БД
+{
+private:
+    CookerPtr *CookerBox;
+    int CookerCount;
+    int MaxSize;
+public:
+    CookerContainer(int maxSize);
+    virtual ~CookerContainer();
+    void AddCooker (CookerPtr newCooker);
+    int GetCount() const { return CookerCount; }
+    CookerPtr GetByIndex(int index) const { return CookerBox[index]; }
+
+};*/
 
 #endif // PovaraH
