@@ -168,18 +168,16 @@ public:
 
 };
 
-/*class CookerContainerV2 // альтернативный сбор поваров в контейнер
+class CookerContainerV2 // контейнер номер 2
 {
 private:
-    vector<CookerBox>
-public:
-    CookerContainer(int maxSize);
-    virtual ~CookerContainer();
-    void AddCooker (CookerPtr newCooker);
-    int GetCount() const { return CookerCount; }
-    CookerPtr GetByIndex(int index) const { return CookerBox[index]; }
+    vector<CookerPtr> CookerBox;
 
-};*/
+public:
+    void AddCooker(CookerPtr newCooker) {CookerBox.push_back(newCooker);}
+    int GetCount() const {return CookerBox.size();}
+    CookerPtr GetByIndex(int index) const { return CookerBox[index]; }
+};
 
 /*class CookerContainerSQLite //контейнер с БД
 {

@@ -98,21 +98,8 @@ int main()
         cookerBox.AddCooker(new WheelchairUser());
     }
 
-    //OutPut(&cookerBox);
-    Vaccation(&cookerBox);
-
-    /*for(int i=0; i<10; i++)
-    {
-        fruitBox.AddFruit(new Apple(ColorEnum::Red));
-    }
-    for(int i=0; i<20; i++)
-    {
-        fruitBox.AddFruit(new Kiwi);
-    }
-    for(int i=0; i<20; i++)
-    {
-        fruitBox.AddFruit(new Orange);
-    }*/
+    OutPut(&cookerBox);
+    //Vaccation(&cookerBox);
 
     return 0;
 }
