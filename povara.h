@@ -1,9 +1,11 @@
 #ifndef PovaraH
 #define PovaraH
 #include <string>
-#include <vector>
+#include <list>
 
 using namespace std;
+
+#include"Patterns.h"
 
 enum class Cooker: int // перечисление поваров
 {
@@ -13,36 +15,21 @@ enum class Cooker: int // перечисление поваров
     WheelchairUser
 };
 
-/*class ActionOfCooker
-{
-protected:
-     int Skill;
-     int Stazh;
-     int Age;
-     string Sex;
-     string Post;
-public:
-     virtual void CookOff() const = 0; // не готовка
-     virtual void CookON() const = 0; // готовка
-     virtual void Dis() const = 0; // увольнение
-     virtual void VacON() const = 0; // отправка в отпуск
-     virtual void VacOff() const = 0; // вернуть из отпуска
-};*/
-
 class ActionOfCooker
 {
 protected:
+     bool Cooking;
      int Skill;
      int Stazh;
      int Age;
      string Sex;
      string Post;
 public:
-     void CookOff(); // не готовка
-     void CookON(); // готовка
-     void Dis(); // увольнение
+     virtual void CookOff() = 0; // не готовка
+     virtual void CookON() = 0; // готовка
+     virtual void Dism() = 0; // увольнение
      virtual void VacON() = 0; // отправка в отпуск
-     void VacOff(); // вернуть из отпуска
+     virtual void VacOff() = 0; // вернуть из отпуска
      virtual Cooker GetCooker() const = 0; // определение повара
 };
 
@@ -52,7 +39,7 @@ class Mouse: public ActionOfCooker
 {
 private:
     bool VacSleep;
-    bool CookPasta;
+    bool Cooking;
     int Skill;
     int Stazh;
     int Age;
@@ -61,10 +48,10 @@ private:
 public:
     Mouse();
     virtual ~Mouse() {};
-    void CookON() {}; // готовит пасту
+    void CookON() {wcout << L"Ушел готовить пасту" << endl; Cooking = true;} // готовит пасту
     void CookOff() {}; // не готовит пасту
-    void Dism() {}; // таракан
-    void VacON() {}; // отправка в отпуск на отсыпание
+    void Dism() {wcout << L"Нашли таракана. Увольняют..." << endl; Skill = 0;} // таракан
+    void VacON() {wcout << L"Ушел в отсып" << endl; Skill -=20; VacSleep = true;} // отправка в отпуск на отсыпание
     void VacOff() {wcout << L"Выспался и пришел на работу!" << endl; VacSleep = false;} // возврат из отпуска
     Cooker GetCooker() const {return Cooker::Mouse;} // определение типа повара
 };
@@ -73,7 +60,7 @@ class Cat: public ActionOfCooker
 {
 private:
     bool VacKan;
-    bool CookSushi;
+    bool Cooking;
     int Skill;
     int Stazh;
     int Age;
@@ -82,11 +69,11 @@ private:
 public:
     Cat();
     virtual ~Cat() {};
-    void CookON(); // готовит суши
-    void CookOff(); // не готовит суши
-    void Dism(); // курение
-    void VacON(); // отправка в отпуск на Канары
-    void VacOff(); // возврат из отпуска
+    void CookON() {wcout << L"Ушел готовить суши" << endl; Cooking = true;} // готовит суши
+    void CookOff() {}; // не готовит суши
+    void Dism() {wcout << L"Застали за курением. Увольняют..." << endl; Skill = 0;} // курение
+    void VacON() {wcout << L"Улетел на Канары!" << endl; Skill -=20; VacKan = true;} // отправка в отпуск на Канары
+    void VacOff() {wcout << L"Вернулся с Канар..." << endl; VacKan = false;} // возврат из отпуска
     Cooker GetCooker() const {return Cooker::Cat;}
 };
 
@@ -94,7 +81,7 @@ class Robot: public ActionOfCooker
 {
 private:
     bool VacFam;
-    bool CookDesert;
+    bool Cooking;
     int Skill;
     int Stazh;
     int Age;
@@ -103,11 +90,11 @@ private:
 public:
     Robot();
     virtual ~Robot() {};
-    void CookON(); // готовит карамель
-    void CookOff(); // не готовит карамель
-    void Dism(); // взломал базу Пентагона
-    void VacON(); // отправка на отпуск к семье
-    void VacOff(); // возврат из отпуска
+    void CookON() {wcout << L"Ушел готовить десерт" << endl; Cooking = true;} // готовит карамель
+    void CookOff() {}; // не готовит карамель
+    void Dism() {wcout << L"Застали за взломом пентагона. Увольняют..." << endl; Skill = 0;} // взломал базу Пентагона
+    void VacON() {wcout << L"На отпуск к семье!" << endl; Skill -=20; VacFam = true;} // отправка на отпуск к семье
+    void VacOff() {wcout << L"Вернулся из отпуска!" << endl; VacFam = false;} // возврат из отпуска
     Cooker GetCooker() const {return Cooker::Robot;}
 };
 
@@ -115,7 +102,7 @@ class WheelchairUser: public ActionOfCooker
 {
 private:
     bool VacKuba;
-    bool CookCotlet;
+    bool Cooking;
     int Skill;
     int Stazh;
     int Age;
@@ -124,34 +111,34 @@ private:
 public:
     WheelchairUser();
     virtual ~WheelchairUser() {};
-    void CookON() {}; // готовит котлету
+    void CookON() {wcout << L"Ушла готовить котлету" << endl; Cooking = true;} // готовит котлету
     void CookOff() {}; // не готовит котлету
-    void Dism() {}; // спалил кухню
-    void VacON() {wcout << L"На Кубу!" << endl; Skill -=20; VacKuba = true;}; // отправка на Кубу
-    void VacOff() {} // возврат из отпуска
+    void Dism() {wcout << L"Спалила кухню. Увольняют..." << endl; Skill = 0;} // спалил кухню
+    void VacON() {wcout << L"На Кубу!" << endl; Skill -=20; VacKuba = true;} // отправка на Кубу
+    void VacOff() {wcout << L"Вернулась из отпуска..." << endl; VacKuba = false;} // возврат из отпуска
     Cooker GetCooker() const {return Cooker::WheelchairUser;} //тип повара: колясочник
 };
 
-/*class CookerContIterator1 : public Iterator<FruitPtr>
+class FirstContIterator : public Iterator<CookerPtr> // итератор для первого контейнера
 {
 private:
-    const  FruitPtr *FruitBox;
-    int Pos;
+    const CookerPtr *CookerBox;
+    int Position;
     int Count;
 
 public:
-    FruitContainerIterator(const  FruitPtr *fruitBox, int count)
+    FirstContIterator(const CookerPtr *cookerBox, int count)
     {
-        FruitBox = fruitBox;
+        CookerBox = cookerBox;
         Count = count;
-        Pos = 0;
+        Position = 0;
     }
 
-    void First() {Pos = 0;}
-    void Next() {Pos++;}
-    bool IsDone() const {return Pos >= Count;}
-    FruitPtr GetCurrent() const {return FruitBox[Pos];}
-};*/
+    void First() { Position = 0; }
+    void Next() { Position++; }
+    bool IsDone() const { return Position >= Count; }
+    CookerPtr CurrentItem() const { return CookerBox[Position]; }
+};
 
 class CookerContainer
 {
@@ -163,35 +150,47 @@ public:
     CookerContainer(int maxSize);
     virtual ~CookerContainer();
     void AddCooker (CookerPtr newCooker);
-    int GetCount() const { return CookerCount; }
-    CookerPtr GetByIndex(int index) const { return CookerBox[index]; }
+    int GetCount() const {return CookerCount;}
+    CookerPtr GetByIndex(int index) const {return CookerBox[index];}
 
+    Iterator<CookerPtr> *GetIterator() // использование итератора
+    {
+        return new FirstContIterator(CookerBox, CookerCount);
+    }
+
+};
+
+class SecondContIterator : public Iterator<CookerPtr> // итератор для второго контейнера
+{
+private:
+    const list<CookerPtr> *CookerBox;
+    list<CookerPtr>::const_iterator iter; //тот итератор, который не может изменить содержимое списка
+
+public:
+    SecondContIterator(const list<CookerPtr> *cookerBox)
+    {
+        CookerBox = cookerBox;
+        iter = CookerBox->begin();
+    }
+
+    void First() { iter = CookerBox->begin(); }
+    void Next() { iter++; }
+    bool IsDone() const { iter == CookerBox->end(); }
+    CookerPtr CurrentItem() const {  return *iter; }
 };
 
 class CookerContainerV2 // контейнер номер 2
 {
 private:
-    vector<CookerPtr> CookerBox;
+    list<CookerPtr> CookerBox;
 
 public:
     void AddCooker(CookerPtr newCooker) {CookerBox.push_back(newCooker);}
     int GetCount() const {return CookerBox.size();}
-    CookerPtr GetByIndex(int index) const { return CookerBox[index]; }
+    Iterator<CookerPtr> *GetIterator()
+    {
+        return new SecondContIterator(&CookerBox);
+    }
 };
-
-/*class CookerContainerSQLite //контейнер с БД
-{
-private:
-    CookerPtr *CookerBox;
-    int CookerCount;
-    int MaxSize;
-public:
-    CookerContainer(int maxSize);
-    virtual ~CookerContainer();
-    void AddCooker (CookerPtr newCooker);
-    int GetCount() const { return CookerCount; }
-    CookerPtr GetByIndex(int index) const { return CookerBox[index]; }
-
-};*/
 
 #endif // PovaraH
