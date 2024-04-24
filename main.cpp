@@ -85,7 +85,7 @@ void Vaccation (CookerContainer *cookerBox) // отправили всех по�
     wcout << L"Все поварята отправлены в отпуск" << endl;
 }
 
-void OutPut_iterator(Iterator<CookerPtr> *iter) // функция для вывода всех повааров через итератор
+void OutPut_iterator(Iterator<CookerPtr> *iter) // функция для вывода всех поваров через итератор
 {
     for(iter->First(); !iter->IsDone(); iter->Next())
     {
@@ -97,7 +97,8 @@ void OutPut_iterator(Iterator<CookerPtr> *iter) // функция для выв�
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    CookerContainer cookerBox(100); // создание 100 поваров (циклом for)
+    //CookerContainer cookerBox(100); // создание 100 поваров (циклом for, повара помещаются в 1-й контейнер)
+    CookerContainerV2 cookerBox; // создание поваров (циклом for, повара помещаются во 2-й контейнер)
     for(int i=0; i<50; i++)
     {
         cookerBox.AddCooker(new Mouse());
