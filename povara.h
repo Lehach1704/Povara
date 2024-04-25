@@ -27,6 +27,7 @@ protected:
 
      ActionOfCooker();
 public:
+    bool ColClothes() const {return ColorOfClothes;}
     bool WearGlasses() const {return WearingGlasses;}
     virtual ~ActionOfCooker() {};
     virtual void CookOff() = 0; // не готовка
@@ -211,6 +212,31 @@ public:
         {
             Iter->Next();
         } while (!Iter->IsDone() && Iter->CurrentItem()->WearGlasses() != Glasses);
+    }
+};
+
+class SecondDecorator : public Decorator <CookerPtr>
+{
+private:
+    bool Clothes; // носит ли повар очки
+public:
+    SecondDecorator(Iterator<CookerPtr> *iter, bool clothes): Decorator(iter) { Clothes = clothes;}
+
+    void First()
+    {
+        Iter->First();
+        while (!Iter->IsDone() && Iter->CurrentItem()->ColClothes() != Clothes)
+        {
+            Iter->Next();
+        }
+    }
+
+    void Next()
+    {
+        do
+        {
+            Iter->Next();
+        } while (!Iter->IsDone() && Iter->CurrentItem()->ColClothes() != Clothes);
     }
 };
 
