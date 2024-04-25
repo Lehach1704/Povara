@@ -20,17 +20,21 @@ class ActionOfCooker
 protected:
      bool Cooking;
      int Skill;
-     int Stazh;
-     int Age;
      string Sex;
      string Post;
+     bool WearingGlasses;
+     bool ColorOfClothes;
+
+     ActionOfCooker();
 public:
-     virtual void CookOff() = 0; // не готовка
-     virtual void CookON() = 0; // готовка
-     virtual void Dism() = 0; // увольнение
-     virtual void VacON() = 0; // отправка в отпуск
-     virtual void VacOff() = 0; // вернуть из отпуска
-     virtual Cooker GetCooker() const = 0; // определение повара
+    bool WearGlasses() const {return WearingGlasses;}
+    virtual ~ActionOfCooker() {};
+    virtual void CookOff() = 0; // не готовка
+    virtual void CookON() = 0; // готовка
+    virtual void Dism() = 0; // увольнение
+    virtual void VacON() = 0; // отправка в отпуск
+    virtual void VacOff() = 0; // вернуть из отпуска
+    virtual Cooker GetCooker() const = 0; // определение повара
 };
 
 typedef ActionOfCooker * CookerPtr;
@@ -41,8 +45,6 @@ private:
     bool VacSleep;
     bool Cooking;
     int Skill;
-    int Stazh;
-    int Age;
     string Sex;
     string Post;
 public:
@@ -62,8 +64,6 @@ private:
     bool VacKan;
     bool Cooking;
     int Skill;
-    int Stazh;
-    int Age;
     string Sex;
     string Post;
 public:
@@ -83,8 +83,6 @@ private:
     bool VacFam;
     bool Cooking;
     int Skill;
-    int Stazh;
-    int Age;
     string Sex;
     string Post;
 public:
@@ -104,8 +102,6 @@ private:
     bool VacKuba;
     bool Cooking;
     int Skill;
-    int Stazh;
-    int Age;
     string Sex;
     string Post;
 public:
@@ -190,6 +186,31 @@ public:
     Iterator<CookerPtr> *GetIterator()
     {
         return new SecondContIterator(&CookerBox);
+    }
+};
+
+class FirstDecorator : public Decorator <CookerPtr>
+{
+private:
+    bool Glasses; // носит ли повар очки
+public:
+    FirstDecorator(Iterator<CookerPtr> *iter, bool glasses): Decorator(iter) { Glasses = glasses;}
+
+    void First()
+    {
+        Iter->First();
+        while (!Iter->IsDone() && Iter->CurrentItem()->WearGlasses() != Glasses)
+        {
+            Iter->Next();
+        }
+    }
+
+    void Next()
+    {
+        do
+        {
+            Iter->Next();
+        } while (!Iter->IsDone() && Iter->CurrentItem()->WearGlasses() != Glasses);
     }
 };
 

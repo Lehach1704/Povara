@@ -5,6 +5,19 @@ using namespace std;
 
 #include "povara.h"
 
+ActionOfCooker::ActionOfCooker()
+{
+    WearingGlasses = bool (rand() % 2);
+    ColorOfClothes = bool (rand() % 2);
+
+
+    bool Vacation;
+    bool Cooking;
+    int Skill;
+    string Sex;
+    string Post;
+}
+
 CookerContainer::CookerContainer(int maxSize) // конструктор контейнера с поварами (1)
 {
     CookerBox = new CookerPtr[maxSize];

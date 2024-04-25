@@ -24,11 +24,11 @@ protected:
 
 public:
     Decorator(Iterator<Type> *iter) {Iter = iter;}
-    virtual ~IteratorDecorator() { delete It; }
-    void First() {It->First(); }
-    void Next() {It->Next(); }
-    bool IsDone() const { return It->IsDone(); }
-    Type CurrentItem() const { return It->CurrentItem(); }
+    virtual ~Decorator() { delete Iter; }
+    void First() {Iter->First(); }
+    void Next() {Iter->Next(); }
+    bool IsDone() const { return Iter->IsDone(); }
+    Type CurrentItem() const { return Iter->CurrentItem(); }
 };
 
 #endif // PatternsH
