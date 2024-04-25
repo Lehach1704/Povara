@@ -9,7 +9,7 @@ ActionOfCooker::ActionOfCooker()
 {
     WearingGlasses = bool (rand() % 2);
     ColorOfClothes = bool (rand() % 2);
-
+    Race = RaceCooker::Unknown;
 
     bool Vacation;
     bool Cooking;
@@ -66,7 +66,18 @@ wstring PrintCookerType(const Cooker type) // описание типа пова
         case Cooker::Cat: return L"Кот";
         case Cooker::Robot: return L"Робот";
         case Cooker::WheelchairUser: return L"Колясочник";
-        default: return L"неизвестно";
+        default: return L"Неизвестно";
+    }
+}
+
+wstring PrintRaceCookerType(const RaceCooker race) // описание расы повара
+{
+    switch(race)
+    {
+        case RaceCooker::African: return L"Негроид";
+        case RaceCooker::European: return L"Европеец";
+        case RaceCooker::Asian: return L"Азиат";
+        default: return L"Неизвестно";
     }
 }
 
@@ -107,6 +118,39 @@ void OutPut_iterator(Iterator<CookerPtr> *iter) // функция для выв�
     }
 }
 
+void HaveGlasses(Iterator<CookerPtr> *iter)
+{
+    for(iter->First(); !iter->IsDone(); iter->Next())
+    {
+        const CookerPtr outCook = iter->CurrentItem();
+
+        wcout<<PrintCookerType(outCook->GetCooker())<<L" = ";
+        wcout<<(outCook->WearGlasses() ? L" Очки есть" : L" Очков нет")<<endl;
+    }
+}
+
+void ColorCloth(Iterator<CookerPtr> *iter)
+{
+    for(iter->First(); !iter->IsDone(); iter->Next())
+    {
+        const CookerPtr outCook = iter->CurrentItem();
+
+        wcout<<PrintCookerType(outCook->GetCooker())<<L" = ";
+        wcout<<(outCook->ColClothes() ? L" Цвет фартука черный" : L" Цвет фартука белый")<<endl;
+    }
+}
+
+void RCooker(Iterator<CookerPtr> *iter)
+{
+    for(iter->First(); !iter->IsDone(); iter->Next())
+    {
+        const CookerPtr outCook = iter->CurrentItem();
+
+        wcout<<PrintCookerType(outCook->GetCooker())<<L" = ";
+        wcout<<PrintRaceCookerType(outCook->GetRace()) << endl;
+    }
+}
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
@@ -132,9 +176,16 @@ int main()
         cookerBox.AddCooker(new WheelchairUser());
     }
 
-    Iterator<CookerPtr> *iter = cookerBox.GetIterator();
+    //Iterator<CookerPtr> *iter = cookerBox.GetIterator();
 
-    OutPut_iterator(iter);
+    //Iterator<CookerPtr> *iter = new FirstDecorator(cookerBox.GetIterator(), true);
+    //HaveGlasses(iter);
+    //ColorCloth(iter);
+
+    Iterator<CookerPtr> *iter = new ThirdDecorator( new FirstDecorator(cookerBox.GetIterator(), true),RaceCooker::African);
+    RCooker(iter);
+
+    //OutPut_iterator(iter);
     delete iter;
     //OutPut(&cookerBox);
     //Vaccation(&cookerBox);

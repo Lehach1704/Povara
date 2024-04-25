@@ -15,6 +15,14 @@ enum class Cooker: int // перечисление поваров
     WheelchairUser
 };
 
+enum class RaceCooker: int
+{
+    African,
+    European,
+    Asian,
+    Unknown
+};
+
 class ActionOfCooker
 {
 protected:
@@ -24,6 +32,7 @@ protected:
      string Post;
      bool WearingGlasses;
      bool ColorOfClothes;
+     RaceCooker Race;
 
      ActionOfCooker();
 public:
@@ -36,6 +45,7 @@ public:
     virtual void VacON() = 0; // отправка в отпуск
     virtual void VacOff() = 0; // вернуть из отпуска
     virtual Cooker GetCooker() const = 0; // определение повара
+    virtual RaceCooker GetRace() {return Race;}
 };
 
 typedef ActionOfCooker * CookerPtr;
@@ -218,7 +228,7 @@ public:
 class SecondDecorator : public Decorator <CookerPtr>
 {
 private:
-    bool Clothes; // носит ли повар очки
+    bool Clothes; // цвет фартука у повара
 public:
     SecondDecorator(Iterator<CookerPtr> *iter, bool clothes): Decorator(iter) { Clothes = clothes;}
 
@@ -237,6 +247,31 @@ public:
         {
             Iter->Next();
         } while (!Iter->IsDone() && Iter->CurrentItem()->ColClothes() != Clothes);
+    }
+};
+
+class ThirdDecorator : public Decorator <CookerPtr>
+{
+private:
+    RaceCooker DesiredRace; // какой расы повар
+public:
+    ThirdDecorator(Iterator<CookerPtr> *iter, RaceCooker desiredRace): Decorator(iter) { DesiredRace = desiredRace;}
+
+    void First()
+    {
+        Iter->First();
+        while (!Iter->IsDone() && Iter->CurrentItem()->GetRace() != DesiredRace)
+        {
+            Iter->Next();
+        }
+    }
+
+    void Next()
+    {
+        do
+        {
+            Iter->Next();
+        } while (!Iter->IsDone() && Iter->CurrentItem()->GetRace() != DesiredRace);
     }
 };
 

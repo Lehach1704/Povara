@@ -11,6 +11,7 @@ Mouse::Mouse()
     int Skill = 100;
     string Sex = "Man";
     string Post = "Chef";
+    Race = RaceCooker::Asian;
 }
 
 Cat::Cat()
@@ -20,6 +21,7 @@ Cat::Cat()
     int Skill = 80;
     string Sex = "Man";
     string Post = "Assistant Chef";
+    Race = RaceCooker::African;
 }
 
 Robot::Robot()
@@ -29,6 +31,7 @@ Robot::Robot()
     int Skill = 50;
     string Sex = "Man";
     string Post = "Confectioner";
+    Race = RaceCooker::European;
 }
 
 WheelchairUser::WheelchairUser()
@@ -38,5 +41,6 @@ WheelchairUser::WheelchairUser()
     int Skill = 30;
     string Sex = "Woman";
     string Post = "Kitchen boy";
+    Race = RaceCooker::European;
 }
 
