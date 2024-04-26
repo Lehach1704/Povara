@@ -170,28 +170,31 @@ ActionOfCooker *ActionOfCooker::CreateCooker(Cooker type)
 
 int main()
 {
+    int a;
     setlocale(LC_ALL, "Russian");
-    CookerContainer cookerBox(100); // создание 100 поваров (циклом for, повара помещаются в 1-й контейнер)
+    wcout << L"Введите количество поваров" << endl;
+    cin >> a;
+    CookerContainer cookerBox(a); // создание 100 поваров (циклом for, повара помещаются в 1-й контейнер)
     //CookerContainerV2 cookerBox; // создание поваров (циклом for, повара помещаются во 2-й контейнер)
-    for(int i=0; i<50; i++)
+    for(int i=0; i<a; i++)
     {
-        cookerBox.AddCooker(new Mouse());
+        cookerBox.AddCooker(CreateCookerType(Cooker(rand() % 4)));
     }
 
-    for(int i=0; i<10; i++)
+    /*for(int i=0; i<=(a/10); i++)
     {
         cookerBox.AddCooker(new Cat());
     }
 
-    for(int i=0; i<10; i++)
+    for(int i=0; i<=10; i++)
     {
         cookerBox.AddCooker(new Robot());
     }
 
-    for(int i=0; i<30; i++)
+    for(int i=0; i<=(a/50); i++)
     {
         cookerBox.AddCooker(new WheelchairUser());
-    }
+    }*/
 
     //Iterator<CookerPtr> *iter = cookerBox.GetIterator();
 

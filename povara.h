@@ -9,10 +9,11 @@ using namespace std;
 
 enum class Cooker: int // перечисление поваров
 {
-    Mouse,
-    Cat,
-    Robot,
-    WheelchairUser
+    Mouse = 0,
+    Cat = 1,
+    Robot = 2,
+    WheelchairUser = 3,
+    Unknown = -1
 };
 
 enum class RaceCooker: int
