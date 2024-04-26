@@ -46,6 +46,7 @@ public:
     virtual void VacOff() = 0; // вернуть из отпуска
     virtual Cooker GetCooker() const = 0; // определение повара
     virtual RaceCooker GetRace() {return Race;}
+    static ActionOfCooker *CreateCooker(Cooker type);
 };
 
 typedef ActionOfCooker * CookerPtr;

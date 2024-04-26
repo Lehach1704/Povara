@@ -151,11 +151,28 @@ void RCooker(Iterator<CookerPtr> *iter)
     }
 }
 
+ActionOfCooker *CreateCookerType(const Cooker type) //фабричный метод
+{
+    switch(type)
+    {
+        case Cooker::Mouse: return new Mouse;
+        case Cooker::Cat: return new Cat;
+        case Cooker::Robot: return new Robot;
+        case Cooker::WheelchairUser: return new WheelchairUser;
+        default: return NULL;
+    }
+}
+
+ActionOfCooker *ActionOfCooker::CreateCooker(Cooker type)
+{
+    return CreateCookerType(type);
+}
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    //CookerContainer cookerBox(100); // создание 100 поваров (циклом for, повара помещаются в 1-й контейнер)
-    CookerContainerV2 cookerBox; // создание поваров (циклом for, повара помещаются во 2-й контейнер)
+    CookerContainer cookerBox(100); // создание 100 поваров (циклом for, повара помещаются в 1-й контейнер)
+    //CookerContainerV2 cookerBox; // создание поваров (циклом for, повара помещаются во 2-й контейнер)
     for(int i=0; i<50; i++)
     {
         cookerBox.AddCooker(new Mouse());
@@ -182,7 +199,7 @@ int main()
     //HaveGlasses(iter);
     //ColorCloth(iter);
 
-    Iterator<CookerPtr> *iter = new ThirdDecorator( new FirstDecorator(cookerBox.GetIterator(), true),RaceCooker::African);
+    Iterator<CookerPtr> *iter = new ThirdDecorator( new FirstDecorator(cookerBox.GetIterator(), true),RaceCooker::European);
     RCooker(iter);
 
     //OutPut_iterator(iter);
